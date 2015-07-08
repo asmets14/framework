@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <% provide(:title, @user.name) %>
+  <h1>
+      <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<%= link_to 'Home', root_path %>
