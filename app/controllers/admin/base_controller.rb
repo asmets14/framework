@@ -1,3 +1,4 @@
 class Admin::BaseController < ApplicationController
-  #qui est l'admin ici
+ http_basic_authenticate_with name: "banane", password: "baba"
+ layout 'admin/base'
 end
