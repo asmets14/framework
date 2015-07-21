@@ -1,4 +1,11 @@
 class Admin::BaseController < ApplicationController
- http_basic_authenticate_with name: "banane", password: "baba"
- layout 'admin/base'
+  before_filter :check_admin
+  
+  layout 'admin/base'
+  
+  def check_admin
+  unless (current_user && current_user.admin?)
+   render :partial => "shared/admin/not_authorized_admin", :status => :unauthorized
+  end
+  end
 end
