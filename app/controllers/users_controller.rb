@@ -30,7 +30,9 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       remember @user
-      redirect_to @user, notice: 'User was successfully created.'
+      UserMailer.account_activation(@user).deliver_now
+      flash[:notice] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render :new, error: 'error when recording'
     end

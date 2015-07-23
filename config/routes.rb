@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root 'static_page#home'
 
+  get 'password_resets/new'
+  get 'password_resets/edit'
+
   get 'contact', to: 'static_page#contact'
-
-  get 'help', to: 'static_page#help'
-
+  get 'help',    to: 'static_page#help'
   get 'sign_up', to: 'users#new'
 
   get    'login',  to: 'sessions#new'
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
 
   resources :users
+  resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 
   namespace :admin do
     resources :users
