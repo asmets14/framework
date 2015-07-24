@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token, :reset_token
+  has_many :microposts, dependent: :destroy
   before_save :downcase_email
   before_create :create_activation_digest
   after_initialize :set_defaults
@@ -19,6 +20,10 @@ class User < ActiveRecord::Base
 
   def set_defaults
     self.admin = false if self.admin.nil?
+  end
+
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 
   def User.new_token
